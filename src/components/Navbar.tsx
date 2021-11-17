@@ -5,19 +5,24 @@ import { RouteName } from '../routes';
 
 const Navbar: FC = () => {
   const router = useHistory();
-  const auth = false;
+  const auth = true;
   return (
     <Layout.Header >
       <Row justify="end">
         {auth
           ?
-            <Menu  theme="dark" mode="horizontal" selectable={false}>
-              <Menu.Item 
-                onClick={() => console.log("Exiting...")}
-                key={1}>
-                  Выйти
-                </Menu.Item>
-            </Menu>
+            <>
+              <div style={{color: 'white'}}>
+                UserName
+              </div>
+              <Menu  theme="dark" mode="horizontal" selectable={false}>
+                <Menu.Item 
+                  onClick={() => console.log("Exiting...")}
+                  key={1}>
+                    Выйти
+                  </Menu.Item>
+              </Menu>
+            </>
           :
             <Menu  theme="dark" mode="horizontal" selectable={false}>
               <Menu.Item 
