@@ -1,4 +1,4 @@
-import { Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import React, {FC} from 'react'
 
 const LoginForm: FC = () => {
@@ -17,6 +17,9 @@ const LoginForm: FC = () => {
         rules={[{ required: true, message: "Пожалуйста, введите пароль"}]}
       >
         <Input />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">Войти</Button>
       </Form.Item>
     </Form>
   )
