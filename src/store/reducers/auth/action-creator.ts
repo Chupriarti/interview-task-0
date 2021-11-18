@@ -11,17 +11,19 @@ export const AuthActionCreators = {
     login: (username: string, password: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AuthActionCreators.setIsLoading(true));
-            const response = await axios.get<IUser[]>('./users.json');
-            const mockUser = response.data.find(user => user.username === username && user.password === password);
-            if (mockUser) {
-                localStorage.setItem('auth', 'true');
-                localStorage.setItem('username', username);
-                dispatch(AuthActionCreators.setIsAuth(true));
-                dispatch(AuthActionCreators.setUser(mockUser));
-            } else {
-                dispatch(AuthActionCreators.setError('Некорректный логин или пароль'));
-            }
-            dispatch(AuthActionCreators.setIsLoading(false));
+            setTimeout(async () => {
+                const response = await axios.get<IUser[]>('./users.json');
+                const mockUser = response.data.find(user => user.username === username && user.password === password);
+                if (mockUser) {
+                    localStorage.setItem('auth', 'true');
+                    localStorage.setItem('username', username);
+                    dispatch(AuthActionCreators.setIsAuth(true));
+                    dispatch(AuthActionCreators.setUser(mockUser));
+                } else {
+                    dispatch(AuthActionCreators.setError('Некорректный логин или пароль'));
+                }
+                dispatch(AuthActionCreators.setIsLoading(false));
+            }, 1000);
         } catch (e) {
             dispatch(AuthActionCreators.setError('Произошла ошибка при логине'));
         } 
