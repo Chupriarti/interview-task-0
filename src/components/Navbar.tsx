@@ -8,7 +8,7 @@ import { AuthActionCreators } from '../store/reducers/auth/action-creator';
 
 const Navbar: FC = () => {
   const router = useHistory();
-  const {isAuth} = useTypedSelector(state => state.auth)
+  const {isAuth, user} = useTypedSelector(state => state.auth)
   const dispatch = useDispatch()
   return (
     <Layout.Header >
@@ -17,7 +17,7 @@ const Navbar: FC = () => {
           ?
             <>
               <div style={{color: 'white'}}>
-                UserName
+                {user.username}
               </div>
               <Menu  theme="dark" mode="horizontal" selectable={false}>
                 <Menu.Item 
