@@ -18,6 +18,8 @@ const Event: FC = () => {
       <Modal
         title="Добавить событие"
         visible={modalVisible}
+        footer={null}
+        onCancel={() => setModalVisible(false)}
       >
       </Modal>
     </Layout>
