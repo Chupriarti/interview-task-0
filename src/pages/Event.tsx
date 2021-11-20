@@ -4,7 +4,6 @@ import EventCalendar from '../components/EventCalendar';
 
 const Event: FC = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
-  console.log(modalVisible)
   return (
     <Layout>
       <EventCalendar events={[]} />
