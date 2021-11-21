@@ -10,7 +10,7 @@ export const EventActionCreators = {
     fetchGuests: () => async (dispatch: AppDispatch) => {
         try {
             const response = await USerService.getUsers();
-            //return response;
+            dispatch(EventActionCreators.setGuests(response.data));
         } catch (e) {
             console.warn(e)
         }
