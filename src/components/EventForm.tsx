@@ -25,7 +25,8 @@ const EventForm: FC<EventFormProps> = (props) => {
         rules={[rules.required()]}
       >
         <Input 
-
+          onChange={e => setEvent({...event, description: e.target.value})}
+          value={event.description}
         />
       </Form.Item>
       <Form.Item
