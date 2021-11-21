@@ -1,13 +1,15 @@
 import { Button, DatePicker, Form, Input, Row, Select } from 'antd';
 import { Moment } from 'moment';
 import React, {FC} from 'react'
+import { useTypedSelector } from '../hooks/useTypedSelector';
 import { IEvent } from '../models/IEvent';
 import { IUser } from '../models/IUser';
 import { formatDate } from '../utils/date';
 import { rules } from '../utils/rules';
 
 interface EventFormProps {
-  guests: IUser[]
+  guests: IUser[],
+  submit?: (event: IEvent) => void
 }
 
 const EventForm: FC<EventFormProps> = (props) => {
@@ -20,13 +22,20 @@ const EventForm: FC<EventFormProps> = (props) => {
     } as IEvent
   )
 
+  const {user} = useTypedSelector(state => state.auth);
+
   const selectDate = (date: Moment | null) => {
     if (date){
       setEvent({...event, date: formatDate(date?.toDate())})
     }
   }
+
+  const submitForm = () => {
+    props.submit && props.submit({...event, author: user.username})
+  }
+
   return (
-    <Form>  
+    <Form onFinish={submitForm}>  
       <Form.Item
         label="Описание события"
         name="description" 
