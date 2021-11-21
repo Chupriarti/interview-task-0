@@ -1,7 +1,9 @@
 import { Button, DatePicker, Form, Input, Row, Select } from 'antd';
+import { Moment } from 'moment';
 import React, {FC} from 'react'
 import { IEvent } from '../models/IEvent';
 import { IUser } from '../models/IUser';
+import { formatDate } from '../utils/date';
 import { rules } from '../utils/rules';
 
 interface EventFormProps {
@@ -17,6 +19,12 @@ const EventForm: FC<EventFormProps> = (props) => {
       guest: ''
     } as IEvent
   )
+
+  const selectDate = (date: Moment | null) => {
+    if (date){
+      setEvent({...event, date: formatDate(date?.toDate())})
+    }
+  }
   return (
     <Form>  
       <Form.Item
@@ -34,7 +42,9 @@ const EventForm: FC<EventFormProps> = (props) => {
         name="date" 
         rules={[rules.required()]}
       >
-        <DatePicker />
+        <DatePicker 
+          onChange={(date: Moment | null) => selectDate(date)}
+        />
       </Form.Item>
       <Form.Item
         label="Выберите гостя"
