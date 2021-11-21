@@ -1,5 +1,5 @@
-import axios from "axios";
 import { AppDispatch } from "../..";
+import USerService from "../../../api/UserService";
 import { IEvent } from "../../../models/IEvent";
 import { IUser } from "../../../models/IUser";
 import { EventActionEnum, SetEventsAction, SetGuestsAction } from "./types";
@@ -9,10 +9,21 @@ export const EventActionCreators = {
     setEvents: (payload: IEvent[]): SetEventsAction => ({type: EventActionEnum.SET_EVENTS, payload}),
     fetchGuests: () => async (dispatch: AppDispatch) => {
         try {
-            const guests = await axios.get<IUser[]>("./users.json");
-            return guests;
+            const response = await USerService.getUsers();
+            dispatch(EventActionCreators.setGuests(response.data));
         } catch (e) {
             console.warn(e)
+        }
+    },
+    createEvent: (event: IEvent) => async (dispatch: AppDispatch) => {
+        try {
+            const events = localStorage.getItem("events") || "[]";
+            const json = JSON.parse(events) as IEvent[];
+            json.push(event);
+            dispatch(EventActionCreators.setEvents(json));
+            localStorage.setItem("events", JSON.stringify(json));
+        } catch (e) {
+            console.warn(e);
         }
     }
 }
