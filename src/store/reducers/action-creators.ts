@@ -1,4 +1,4 @@
-import { AuthActionCreators } from "./auth/action-creator";
+import { AuthActionCreators } from "./auth/action-creators";
 
 export const allActionCreators = {
     ...AuthActionCreators
