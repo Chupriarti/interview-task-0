@@ -15,7 +15,7 @@ export const EventActionCreators = {
             console.warn(e)
         }
     },
-    createEvent: (event: IEvent) => () => async (dispatch: AppDispatch) => {
+    createEvent: (event: IEvent) => async (dispatch: AppDispatch) => {
         try {
             const events = localStorage.getItem("events") || "[]";
             const json = JSON.parse(events) as IEvent[];

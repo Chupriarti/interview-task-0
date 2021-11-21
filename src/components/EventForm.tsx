@@ -9,7 +9,7 @@ import { rules } from '../utils/rules';
 
 interface EventFormProps {
   guests: IUser[],
-  submit?: (event: IEvent) => void
+  submit: (event: IEvent) => void
 }
 
 const EventForm: FC<EventFormProps> = (props) => {
@@ -31,7 +31,7 @@ const EventForm: FC<EventFormProps> = (props) => {
   }
 
   const submitForm = () => {
-    props.submit && props.submit({...event, author: user.username})
+    props.submit({...event, author: user.username})
   }
 
   return (
