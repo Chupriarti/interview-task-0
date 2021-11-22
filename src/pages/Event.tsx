@@ -8,12 +8,14 @@ import { IEvent } from '../models/IEvent';
 
 const Event: FC = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
-  const {fetchGuests, createEvent} = useActions();
+  const {fetchGuests, createEvent, fetchEvents} = useActions();
   const {guests} = useTypedSelector(state => state.event)
+  const {user} = useTypedSelector(state => state.auth)
+
   React.useEffect(() => {
+    fetchEvents(user.username);
     fetchGuests();
   }, [])
-
   const addNewEvent = (event: IEvent) => {
     setModalVisible(false);
     createEvent(event);
