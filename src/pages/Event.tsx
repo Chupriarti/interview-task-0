@@ -4,6 +4,7 @@ import EventCalendar from '../components/EventCalendar';
 import EventForm from '../components/EventForm';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import { IEvent } from '../models/IEvent';
 
 const Event: FC = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -12,6 +13,11 @@ const Event: FC = () => {
   React.useEffect(() => {
     fetchGuests();
   }, [])
+
+  const addNewEvent = (event: IEvent) => {
+    setModalVisible(false);
+    createEvent(event);
+  }
 
   return (
     <Layout>
@@ -31,7 +37,7 @@ const Event: FC = () => {
       >
         <EventForm  
           guests={guests}
-          submit={event => createEvent(event)}
+          submit={addNewEvent}
         />
       </Modal>
     </Layout>
